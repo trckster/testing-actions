@@ -1,0 +1,11 @@
+name: Testing
+
+on: push
+
+jobs:
+	build:
+		runs-on: self-hosted
+		steps:
+			- name: No Idea
+			  run: bash hello.sh
+
