@@ -1,0 +1,9 @@
+say-hello:
+  stage: hello
+  script:
+    - echo "Hello, $GITLAB_USER_LOGIN!"
+
+run-script:
+  stage: script
+  script:
+    - bash hello.sh
