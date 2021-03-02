@@ -1,13 +1,16 @@
-stages:
-  - test
-  - deploy
+before_script:
+  - apt-get update -qq
+  - apt-get install -qq git
+  # Setup SSH deploy keys
+  - 'which ssh-agent || ( apt-get install -qq openssh-client )'
+  - eval $(ssh-agent -s)
+  - ssh-add <(echo "$SSH_PRIVATE_KEY")
+  - mkdir -p ~/.ssh
+  - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
 
-say-hello:
-  stage: test
-  script:
-    - echo "Hello, $GITLAB_USER_LOGIN!"
-
-run-script:
+test-deploy:
   stage: deploy
   script:
-    - bash hello.sh
+    - ssh actions@trckster.tk "cd /deployments/testing-actions && git checkout master && git pull origin master && exit"
+  only:
+    - master
