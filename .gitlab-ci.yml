@@ -1,9 +1,9 @@
-build-say-hello:
-  stage: hello
+say-hello:
+  stage: test
   script:
     - echo "Hello, $GITLAB_USER_LOGIN!"
 
-deploy-run-script:
-  stage: script
+run-script:
+  stage: deploy
   script:
     - bash hello.sh
