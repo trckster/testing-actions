@@ -11,6 +11,6 @@ before_script:
 test-deploy:
   stage: deploy
   script:
-    - ssh actions@trckster.tk "cd /deployments/testing-actions && git checkout master && git pull origin master && exit"
+    - ssh actions@trckster.tk "cd /deployments/testing-actions; git checkout master; git pull origin master; exit"
   only:
     - master
